@@ -57,9 +57,9 @@ Jost's Hairline (100) and Black (900) masters are loaded alongside Book (400). T
 
 ## 8. Picture and sound share one clock
 
-`src/timing.ts` holds the section times, the weight curve, the digit-roll times and the finale landing times. Both the film (`src/main.ts`) and the score (`score/score.ts`) import it. So the supersaw's filter cutoff is mapped from the same weight value the slider shows (100 maps to 250 Hz, 900 to 8 kHz), every odometer click lands on a rolling digit, and the finale plucks land with the specimen letters.
+`src/timing.ts` holds the section times, the weight curve, the digit-roll times and the finale landing times. Both the film (`src/main.ts`) and the sound effects (`score/sfx.ts`) import it, so every odometer click lands on a rolling digit and every era change gets its swell and thump on the cut.
 
-The instruments are made from scratch with Reel's synthesizer: additive organ partials, FM bells, Karplus-Strong plucked strings (a burst of noise circulating in a short delay line with a damping filter) for lute, harpsichord and bass, detuned saw unison for strings and the supersaw, square waves for the chiptune. The mix is normalised to -14 LUFS with a limiter keeping peaks under -1.5 dBTP.
+The music is a Google Flow Music track requested at 120 BPM. Its tempo was measured from its onsets (120.02 BPM, a downbeat every 2 s from 0.792 s), and `score/mix.py` cuts it only on bar lines with 30 ms equal-power crossfades: one breakdown bar is played twice so the lift lands on the finale at 32 s, and the last four seconds are the track's own ending. A check after mixing confirms the onsets fall on the era cuts (about three times stronger there than off the grid) and that no splice clicks. The mix is normalised to -14 LUFS with a limiter keeping peaks under -1.5 dBTP.
 
 ## 9. Rendering
 

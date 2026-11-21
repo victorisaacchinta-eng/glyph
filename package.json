@@ -8,11 +8,12 @@
   "author": "Victor Isaac",
   "scripts": {
     "build": "esbuild src/main.ts --bundle --format=esm --target=es2022 --outfile=dist/glyph.js",
-    "score": "esbuild score/score.ts --bundle --platform=node --format=esm --outfile=score/score.mjs --log-level=warning && reel score score/score.mjs -o score/score.wav",
+    "score": "npm run sfx && python3 score/mix.py music/flow-typesetting.m4a score/sfx.wav score/score.raw.wav && reel master score/score.raw.wav -o score/score.wav",
     "sheet": "reel sheet index.html -o media/sheet.png --size 1920x1080 --every 2",
     "render": "reel render index.html -o media/glyph-16x9.mp4 --size 1920x1080 --subframes 4 --workers 2 --audio score/score.wav",
     "render:square": "reel render index.html -o media/glyph-1x1.mp4 --size 1080x1080 --subframes 4 --workers 2 --audio score/score.wav",
-    "test": "esbuild test/*.test.ts --bundle --platform=node --format=esm --outdir=dist/test --log-level=warning && node --test dist/test/*.test.js"
+    "test": "esbuild test/*.test.ts --bundle --platform=node --format=esm --outdir=dist/test --log-level=warning && node --test dist/test/*.test.js",
+    "sfx": "esbuild score/sfx.ts --bundle --platform=node --format=esm --outfile=score/sfx.mjs --log-level=warning && reel score score/sfx.mjs -o score/sfx.wav"
   },
   "dependencies": {
     "opentype.js": "^1.3.4"

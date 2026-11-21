@@ -6,3 +6,6 @@ score/*.raw.wav
 score/score.mjs
 media/*.log
 .DS_Store
+music/
+score/sfx.mjs
+score/sfx.wav

@@ -8,7 +8,7 @@ Watch the full film: [16:9, 38 s](media/glyph-16x9.mp4) · [1:1, 38 s](media/gly
 
 Glyph is a 38-second, code-rendered motion film. A single lowercase *a* travels from Gutenberg's blackletter (1455) to variable fonts (2016) without a cut. Around it, the film measures each typeface live: stroke contrast and the axis of stress are computed from that typeface's own *o*, and the geometric era fits a least-squares circle to the bowl of the single-story *a*. Nothing on screen is typed in by hand except the history.
 
-The score is synthesized in code, so it can travel through the same time: organ and bells, then lute, harpsichord, strings, a machine room, swing, chiptune and a supersaw. The supersaw's filter follows the font-weight curve on screen, the odometer ticks land on the rolling year digits, and the finale's plucks land as each specimen letter does.
+The music is a harpsichord-and-strings electronic track made in Google Flow Music at 120 BPM, the film's own tempo. It is edited on its bar lines so every era change lands on a downbeat and the track's lift out of its breakdown lands on the finale. The sound effects are generated in code from the picture's timing: a swell into each era change, an odometer click on every rolling year digit, an impact on the finale.
 
 ## The eight stops
 
@@ -55,7 +55,7 @@ npx reel preview index.html   # live player: space to play, arrows to step, x fo
 Render it yourself:
 
 ```bash
-npm run score              # synthesize and master score/score.wav (-14 LUFS)
+npm run score              # sound effects in code, music edit and mix, master to score/score.wav (-14 LUFS)
 npm run sheet              # contact sheet for review, one still per beat
 npm run render             # 1920x1080, 60 fps, motion blur
 npm run render:square      # 1080x1080
@@ -70,15 +70,18 @@ src/outline.ts   glyph outlines as polygons (flatten, resample, nesting)
 src/measure.ts   distance transform, ring contrast, stress axis, circle fit, grid tracing
 src/sdf.ts       signed distance fields and marching squares
 src/scene.ts     one-time setup: fonts, outlines, measurements, fields
-src/timing.ts    timing shared by picture and score
+src/timing.ts    timing shared by picture and sound
 src/main.ts      the film: layout, layers, transitions
-score/score.ts   the synthesized score
+score/sfx.ts     sound effects generated from the picture's timing
+score/mix.py     the music edit (on bar lines) and the mix
 test/            tests on synthetic shapes with known answers
 ```
 
 ## Credits
 
 Directed and built by [Victor Isaac](https://github.com/victorisaacchinta-eng).
+
+Music: "Typesetting in Motion", made in Google Flow Music. The music file is not in the repository; `npm run score` expects it at `music/flow-typesetting.m4a`, and the finished mix is `score/score.wav`.
 
 Typefaces, all under the SIL Open Font License 1.1 (texts in `assets/fonts/licenses/`): Texturina (Omnibus-Type), EB Garamond (Georg Duffner and Octavio Pardo), Baskervville (ANRT), Bodoni Moda (indestructible type*), Schibsted Grotesk (Schibsted), Jost (indestructible type*).
 
