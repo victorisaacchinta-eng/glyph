@@ -4,13 +4,13 @@ This is the walkthrough to read before presenting Glyph. It explains each algori
 
 ## 1. The idea in one sentence
 
-One letter, the lowercase *a*, changes from typeface to typeface in historical order, and the film measures each typeface while you watch, so the history is shown as data rather than claimed.
+One letter, the lowercase *a*, changes from typeface to typeface in historical order, and the film measures each typeface while you watch, so every historical claim arrives with a measurement.
 
 ## 2. From a font file to a polygon
 
 A font stores each letter as a set of closed curves (quadratic or cubic Bezier segments). `src/outline.ts` asks opentype.js for the path of a glyph and **flattens** it: each curve becomes 14 straight segments. A glyph is then a list of closed polygons called contours. The *a* usually has two: the outer silhouette and the hole of the bowl (the counter).
 
-Every letter is scaled so its **x-height is 1000 units**. The x-height is the height of a lowercase *x*, measured from the font's own *x* glyph. Normalising it means the morph shows how the shapes changed, not how big the fonts happen to be.
+Every letter is scaled so its **x-height is 1000 units**. The x-height is the height of a lowercase *x*, measured from the font's own *x* glyph. Normalising it means the morph shows only how the shapes changed; differences in the fonts' nominal sizes drop out.
 
 To know which contour is a hole, `depths()` checks how many other contours each one sits inside (an even-odd point-in-polygon test). Depth 0 is an outer, depth 1 is a hole.
 
@@ -47,7 +47,7 @@ All numbers on screen are computed in `src/measure.ts` from the same outlines.
 
 **Also in the code**: an exact Euclidean distance transform (Felzenszwalb and Huttenlocher) that turns a rasterised glyph into local stroke widths along its medial ridge. It is tested on a bar of known width. It was the first contrast method; on whole letters the tapered joins confuse it, which is why the ring method on the *o* is what appears on screen.
 
-## 6. The bitmap era is drawn, not converted
+## 6. The bitmap era is drawn by hand
 
 Sampling a vector *a* onto a 6-pixel grid produces a blob. That is historically accurate: screen fonts of 1984 were drawn pixel by pixel because automatic conversion at that size fails. So the 1984 *a*, *o* and digits are drawn on a grid in `src/scene.ts`, then traced back into polygons (`traceGrid`) so the same morph pipeline can carry them. The on-screen credit says so.
 
@@ -67,7 +67,7 @@ Reel calls `seek(t)` on the page for every frame and screenshots it in headless 
 
 ## 10. Honest limits
 
-- The typefaces are open-source revivals and new designs in each tradition, not the historical punches. The measurements describe these fonts.
+- The typefaces are open-source revivals and new designs in each tradition. The measurements describe these fonts; the historical punches would differ in detail.
 - Letters are normalised to one x-height, so real differences in x-height between eras are not shown.
 - Distance-field blending can thin a stroke briefly mid-morph when two shapes barely overlap; at 0.8 seconds per transition, with motion blur, it reads as a melt.
-- Built with Claude as an AI engineering collaborator; every number and algorithm above is in the code and tested in `test/`.
+- Every number and algorithm above is in the code and tested in `test/`.

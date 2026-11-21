@@ -23,7 +23,7 @@ The score is synthesized in code, so it can travel through the same time: organ 
 | 1984 | Bitmap | drawn for this film on a 6-pixel x-height | 5 by 6 pixels |
 | 2016 | Variable | Jost Hairline to Black | weight 100 to 900, live |
 
-The arc the numbers draw is the real one: the broad-pen angle of blackletter, the tilted axis of old-style, the axis turning upright, contrast peaking at the Didone hairline, then sans serifs falling to monoline. These are open-source revivals and designs in each tradition, not the historical punches, so the exact figures belong to these fonts.
+The arc the numbers draw is the real one: the broad-pen angle of blackletter, the tilted axis of old-style, the axis turning upright, contrast peaking at the Didone hairline, then sans serifs falling to monoline. The fonts are open-source revivals and designs in each tradition, so the exact figures belong to these fonts; the historical punches would measure slightly differently.
 
 ## Stills
 
@@ -34,7 +34,7 @@ The arc the numbers draw is the real one: the broad-pen angle of blackletter, th
 
 ## How it works
 
-- **Outlines, not images.** opentype.js reads each font; every glyph is flattened into polygons and scaled to a common x-height of 1000 units.
+- **Real outlines.** opentype.js reads each font; every glyph is flattened into polygons and scaled to a common x-height of 1000 units.
 - **Morphing with signed distance fields.** Point-to-point interpolation was the first attempt and it tore whenever two letters disagreed on topology (a double-story *a* into a single-story one, a vector into pixels). Each glyph is now a grid of signed distances to its outline; a morph blends two grids and extracts the zero contour with marching squares. At rest the film draws the exact outlines; in motion it draws the blended contour.
 - **Year digits** melt the same way when only the typeface changes, and roll like an odometer when the value changes, because a 4 halfway to a 5 is not a shape.
 - **Measurements**: contrast is the thickest over the thinnest stroke of the *o* ring (distance from the counter to the outer contour, smoothed); the stress axis joins the two thinnest points; the geometric bowl gets a Kasa least-squares circle fit.
@@ -78,7 +78,7 @@ test/            tests on synthetic shapes with known answers
 
 ## Credits
 
-Directed and built by [Victor Isaac](https://github.com/victorisaacchinta-eng), with Claude as an AI engineering collaborator.
+Directed and built by [Victor Isaac](https://github.com/victorisaacchinta-eng).
 
 Typefaces, all under the SIL Open Font License 1.1 (texts in `assets/fonts/licenses/`): Texturina (Omnibus-Type), EB Garamond (Georg Duffner and Octavio Pardo), Baskervville (ANRT), Bodoni Moda (indestructible type*), Schibsted Grotesk (Schibsted), Jost (indestructible type*).
 
