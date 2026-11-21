@@ -5,10 +5,4 @@ tools/*.png
 score/*.raw.wav
 score/score.mjs
 media/*.log
-media/v1-*.png
-media/v2-*.png
-media/morph-detail*.png
-media/square-v*.png
-media/sheet-v1.png
 .DS_Store
-media/*.mp4.part

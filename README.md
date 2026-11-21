@@ -25,6 +25,13 @@ The score is synthesized in code, so it can travel through the same time: organ 
 
 The arc the numbers draw is the real one: the broad-pen angle of blackletter, the tilted axis of old-style, the axis turning upright, contrast peaking at the Didone hairline, then sans serifs falling to monoline. These are open-source revivals and designs in each tradition, not the historical punches, so the exact figures belong to these fonts.
 
+## Stills
+
+| | |
+| --- | --- |
+| ![1790, Didone: contrast measured at 5.2 to 1 with a vertical axis](media/still-1790-didone.jpg) | ![1927, Geometric: a least-squares circle fitted to the bowl](media/still-1927-geometric.jpg) |
+| ![1984, Bitmap: a hand-drawn 5 by 6 pixel a on its grid](media/still-1984-bitmap.jpg) | ![2016, Variable: the weight axis swept from Hairline to Black](media/still-2016-variable.jpg) |
+
 ## How it works
 
 - **Outlines, not images.** opentype.js reads each font; every glyph is flattened into polygons and scaled to a common x-height of 1000 units.
@@ -33,7 +40,7 @@ The arc the numbers draw is the real one: the broad-pen angle of blackletter, th
 - **Measurements**: contrast is the thickest over the thinnest stroke of the *o* ring (distance from the counter to the outer contour, smoothed); the stress axis joins the two thinnest points; the geometric bowl gets a Kasa least-squares circle fit.
 - **Rendering** uses [Reel](https://github.com/victorisaacchinta-eng/reel): every frame is a pure function of time, rendered in headless Chrome with 4x subframe motion blur and muxed with ffmpeg.
 
-The full walkthrough, written so it can be explained out loud, is in [docs/how-it-works.md](docs/how-it-works.md).
+The full walkthrough, written so it can be explained out loud, is in [docs/how-it-works.md](docs/how-it-works.md). The review artifacts that shaped it (the tearing morph, the layout collision, the score checks) are in [docs/process](docs/process/README.md).
 
 ## Run it
 
